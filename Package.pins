@@ -2,6 +2,12 @@
   "autoPin": true,
   "pins": [
     {
+      "package": "Bridging",
+      "reason": null,
+      "repositoryURL": "https://github.com/IBM-Swift/Bridging.git",
+      "version": "1.7.1"
+    },
+    {
       "package": "CCurl",
       "reason": null,
       "repositoryURL": "https://github.com/IBM-Swift/CCurl.git",
@@ -26,10 +32,22 @@
       "version": "1.7.15"
     },
     {
+      "package": "KituraMustache",
+      "reason": null,
+      "repositoryURL": "https://github.com/IBM-Swift/Kitura-MustacheTemplateEngine.git",
+      "version": "1.7.2"
+    },
+    {
       "package": "LoggerAPI",
       "reason": null,
       "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
       "version": "1.7.0"
+    },
+    {
+      "package": "Mustache",
+      "reason": null,
+      "repositoryURL": "https://github.com/IBM-Swift/GRMustache.swift.git",
+      "version": "1.7.2"
     },
     {
       "package": "SSLService",

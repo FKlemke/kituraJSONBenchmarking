@@ -1,5 +1,6 @@
 import Kitura
 import SwiftyJSON
+import KituraMustache
 
 
 #if os(Linux)
@@ -10,6 +11,8 @@ import SwiftyJSON
 
 // Create a new router
 let router = Router()
+router.add(templateEngine: MustacheTemplateEngine())
+
 
 func getJSON() -> [String: Int] {
     var rndJSON = [String: Int]()
@@ -32,6 +35,22 @@ router.get("/jsonKitura") { _, response, next in
     let json = JSON(getJSON())
     try response.send(json: json).end()
 }
+
+router.get(middleware: StaticFileServer(path: "./public"))
+
+router.get("/htmlKitura") { _, response, next in
+    response.headers["Content-Type"] = "text/html; charset=utf-8"
+    let htmlPage = "<!DOCTYPE html><html lang=\"en\"><body><h1>Benchmarking Server Side Swift Frameworks</h1><p style=\"color:red;\">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <img src=\"/img/swfit-background.jpg\" alt=\"Benchmark values for wrk test\"> <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></body></html>"
+    try response.send(htmlPage).end()
+}
+
+router.get("/htmlStKitura") { _, response, next in
+    response.headers["Content-Type"] = "text/html; charset=utf-8"
+    let htmlPage = "<!DOCTYPE html><html lang=\"en\"><body><h1>Benchmarking Server Side Swift Frameworks</h1><p style=\"color:red;\">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <img src=\"/img/swfit-background-GL.jpg\" alt=\"Benchmark values for wrk test\"> <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></body></html>"
+    try response.send(htmlPage).end()
+}
+
+
 
 
 
