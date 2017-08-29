@@ -36,6 +36,15 @@ router.get("/jsonKitura") { _, response, next in
     try response.send(json: json).end()
 }
 
+router.get("/jsonShortKitura") { _, response, next in
+    let jsonDic: [String: Int] = [
+        "Vapor":941,
+        "Kitura":1337,
+        "Perfect":42]
+    let json = JSON(jsonDic)
+    try response.send(json: json).end()
+}
+
 router.get(middleware: StaticFileServer(path: "./public"))
 
 router.get("/htmlKitura") { _, response, next in
@@ -44,7 +53,7 @@ router.get("/htmlKitura") { _, response, next in
     try response.send(htmlPage).end()
 }
 
-router.get("/htmlStKitura") { _, response, next in
+router.get("/htmlLargeKitura") { _, response, next in
     response.headers["Content-Type"] = "text/html; charset=utf-8"
     let htmlPage = "<!DOCTYPE html><html lang=\"en\"><body><h1>Benchmarking Server Side Swift Frameworks</h1><p style=\"color:red;\">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> <img src=\"/img/swfit-background-GL.jpg\" alt=\"Benchmark values for wrk test\"> <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></body></html>"
     try response.send(htmlPage).end()
@@ -59,3 +68,4 @@ Kitura.addHTTPServer(onPort: 8080, with: router)
 
 // Start the Kitura runloop (this call never returns)
 Kitura.run()
+
